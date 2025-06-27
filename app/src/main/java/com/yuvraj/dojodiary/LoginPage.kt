@@ -1,5 +1,6 @@
 package com.yuvraj.dojodiary
 
+import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -8,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.lottie.LottieAnimationView
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginPage : AppCompatActivity() {
@@ -24,6 +26,12 @@ class LoginPage : AppCompatActivity() {
         val emailEditText = findViewById<EditText>(R.id.hoursEditText)
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
         val loginButton = findViewById<Button>(R.id.loginButton)
+
+        //val animation=findViewById<LottieAnimationView>(R.id.animation)
+
+
+        //animation.repeatCount=ValueAnimator.INFINITE
+        //animation.playAnimation()
 
         // set click listener to navigate to signup page
         loginToSignUpTextView.setOnClickListener {

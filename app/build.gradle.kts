@@ -51,4 +51,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore:25.0.0")
+
+    //lottie animation
+    implementation("com.airbnb.android:lottie:6.6.6")
 }
