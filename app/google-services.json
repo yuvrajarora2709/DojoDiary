@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "634993320818",
+    "project_id": "dojo-diary",
+    "storage_bucket": "dojo-diary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634993320818:android:039b5f222b0b62451d73eb",
+        "android_client_info": {
+          "package_name": "com.yuvraj.dojodiary"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRw569QnIHulBMZf_tZkHJzFIE8gFFE_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

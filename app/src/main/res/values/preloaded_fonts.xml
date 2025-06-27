@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/alfa_slab_one</item>
+        <item>@font/andika</item>
+        <item>@font/asap_thin</item>
+        <item>@font/averia_libre</item>
+        <item>@font/cambay</item>
+        <item>@font/convergence</item>
+        <item>@font/gelasio</item>
+        <item>@font/khula</item>
+        <item>@font/mada_extralight</item>
+    </array>
+</resources>
