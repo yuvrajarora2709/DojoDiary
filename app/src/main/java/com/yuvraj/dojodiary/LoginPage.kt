@@ -27,11 +27,11 @@ class LoginPage : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
         val loginButton = findViewById<Button>(R.id.loginButton)
 
-        //val animation=findViewById<LottieAnimationView>(R.id.animation)
+        val animation=findViewById<LottieAnimationView>(R.id.animation)
 
 
-        //animation.repeatCount=ValueAnimator.INFINITE
-        //animation.playAnimation()
+        animation.repeatCount=ValueAnimator.INFINITE
+        animation.playAnimation()
 
         // set click listener to navigate to signup page
         loginToSignUpTextView.setOnClickListener {
