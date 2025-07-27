@@ -56,60 +56,66 @@ class CreatePostActivity : AppCompatActivity() {
             val hours = hoursEditText.text.toString()
             val organization = organizationEditText.text.toString()
 
-            //To get current date and time
-            val currentTime = LocalDateTime.now()
-            //To get current day from the current date
-            val dayOfWeek = currentTime.dayOfWeek.toString()
+            if (organization.isNotEmpty() && organization.isNotBlank() && hours.isNotBlank() && hours.isNotEmpty()){
 
-            //Create a date formatter
-            val dateFormatter = DateTimeFormatter.ofPattern("MMMM dd yyyy", Locale.ENGLISH)
-            //Format the date
-            val requiredDate = currentTime.format(dateFormatter).toString()
+                //To get current date and time
+                val currentTime = LocalDateTime.now()
+                //To get current day from the current date
+                val dayOfWeek = currentTime.dayOfWeek.toString()
 
-            //Create time formatter
-            val timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss",Locale.getDefault())
-            //Format the time
-            val requiredTime = currentTime.format(timeFormatter)
+                //Create a date formatter
+                val dateFormatter = DateTimeFormatter.ofPattern("MM/dd/yy", Locale.ENGLISH)
+                //Format the date
+                val requiredDate = currentTime.format(dateFormatter).toString()
 
-            //Creating a random postid to save the post because we have not passed any name in the document
-            val postId = database.collection("MY_DATABASE").document(USERID).collection("POST").document().id
+                //Create time formatter
+                val timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss",Locale.getDefault())
+                //Format the time
+                val requiredTime = currentTime.format(timeFormatter)
 
-            //Creating map before saving to database
-            val map = mutableMapOf<String,String>()
-            map.put("ORGANIZATION",organization)
-            map.put("HOURS",hours)
-            map.put("DAY",dayOfWeek)
-            map.put("DATE",requiredDate)
-            map.put("TIME",requiredTime)
-            map.put("POST_ID",postId)
+                //Creating a random postid to save the post because we have not passed any name in the document
+                val postId = database.collection("MY_DATABASE").document(USERID).collection("POST").document().id
 
-            //Saving the post to database
+                //Creating map before saving to database
+                val map = mutableMapOf<String,String>()
+                map.put("ORGANIZATION",organization)
+                map.put("HOURS",hours)
+                map.put("DAY",dayOfWeek)
+                map.put("DATE",requiredDate)
+                map.put("TIME",requiredTime)
+                map.put("POST_ID",postId)
 
-            database.collection("MY_DATABASE").document(USERID).collection("POST").document(postId).set(map)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Post added", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this,MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                //Saving the post to database
+
+                database.collection("MY_DATABASE").document(USERID).collection("POST").document(postId).set(map)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Post added", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this,MainActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                        startActivity(intent)
+                        finish()
                     }
-                    startActivity(intent)
-                    finish()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Some error occured", Toast.LENGTH_SHORT).show()
-                }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Some error occured", Toast.LENGTH_SHORT).show()
+                    }
 
-            //Update total hours
+                //Update total hours
 
-            val newTotalHours = totalHoursInNumber + hours.toInt()
-            val map2 = mutableMapOf<String,String>()
-            map2.put("HOURS",newTotalHours.toString())
-            database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").set(map2)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Total hours updated", Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Some error occured in updating total hours", Toast.LENGTH_SHORT).show()
-                }
+                val newTotalHours = totalHoursInNumber + hours.toInt()
+                val map2 = mutableMapOf<String,String>()
+                map2.put("HOURS",newTotalHours.toString())
+                database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").set(map2)
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Total hours updated", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(this, "Some error occured in updating total hours", Toast.LENGTH_SHORT).show()
+                    }
+            }else{
+                Toast.makeText(this, "Enter all details", Toast.LENGTH_SHORT).show()
+            }
+
         }
     }
 }

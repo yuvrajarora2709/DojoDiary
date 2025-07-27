@@ -2,7 +2,9 @@ package com.yuvraj.dojodiary
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -18,7 +20,7 @@ import java.util.jar.Attributes.Name
 
 class ProfileActivity : AppCompatActivity() {
 
-    // Initializing firebase authentication, database, and USERID
+    // Initializing firebase authentication, database, and USERID and UI Elements
     val auth = FirebaseAuth.getInstance()
     val database: FirebaseFirestore by lazy { Firebase.firestore }
     val USERID = auth.currentUser?.uid.toString()
@@ -29,13 +31,16 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         // Initialization of UI Elements
-        val nameTextView = findViewById<TextView>(R.id.nameTextView)
-        val hoursTextView = findViewById<TextView>(R.id.hoursTextView)
         val editProfileButton = findViewById<Button>(R.id.editProfileButton)
         val logoutButton = findViewById<Button>(R.id.logoutButton)
         val refreshFAB = findViewById<FloatingActionButton>(R.id.refreshFAB)
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+        val nameTextView = findViewById<TextView>(R.id.nameTextView)
+        val hoursTextView = findViewById<TextView>(R.id.hoursTextView)
+        progressBar.visibility=View.VISIBLE
 
         refreshFAB.setOnClickListener{
+            progressBar.visibility = View.VISIBLE
             // Added Database to sore profile and name
             database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("NAME").get()
 
@@ -48,6 +53,7 @@ class ProfileActivity : AppCompatActivity() {
                     if (fetchedName=="null"){
                         nameTextView.setText("Name: None")
                     }
+                    progressBar.visibility = View.GONE
                 }
 
             database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").get()
@@ -59,7 +65,9 @@ class ProfileActivity : AppCompatActivity() {
                     if (fetchedHours=="null"){
                         hoursTextView.setText("Total Hours: 0")
                     }
+                    progressBar.visibility = View.GONE
                 }
+
 
         }
 
@@ -75,6 +83,7 @@ class ProfileActivity : AppCompatActivity() {
                 if (fetchedName=="null"){
                     nameTextView.setText("Name: None")
                 }
+                progressBar.visibility = View.GONE
             }
 
         database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").get()
@@ -86,6 +95,7 @@ class ProfileActivity : AppCompatActivity() {
                 if (fetchedHours=="null"){
                     hoursTextView.setText("Total Hours: 0")
                 }
+                progressBar.visibility = View.GONE
             }
 
         // set clicklistener for logout
@@ -106,4 +116,32 @@ class ProfileActivity : AppCompatActivity() {
 
 
     }
+
+//    fun fetchProfile(){
+//        // Added Database to sore profile and name
+//        database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("NAME").get()
+//
+//            // added successlistener to fetch/keep name for profile
+//            .addOnSuccessListener {
+//                val fetchedName = it.get("NAME").toString()
+//                nameTextView.setText("Name: "+fetchedName)
+//                //Toast.makeText(this, "check", Toast.LENGTH_SHORT).show()
+//
+//                if (fetchedName=="null"){
+//                    nameTextView.setText("Name: None")
+//                }
+//
+//            }
+//
+//        database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").get()
+//
+//            .addOnSuccessListener {
+//                val fetchedHours = it.get("HOURS").toString()
+//                hoursTextView.setText("Total Hours: "+fetchedHours)
+//
+//                if (fetchedHours=="null"){
+//                    hoursTextView.setText("Total Hours: 0")
+//                }
+//            }
+//    }
 }

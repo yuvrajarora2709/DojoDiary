@@ -30,7 +30,6 @@ class RecyclerAdapter(private val activity: Activity, val arrayPost: ArrayList<P
         val organizationTextView = itemView.findViewById<TextView>(R.id.organizationTextView)
         val hoursTextView = itemView.findViewById<TextView>(R.id.hoursTextView)
         val dateTextView = itemView.findViewById<TextView>(R.id.dateTextView)
-        val dayTextView = itemView.findViewById<TextView>(R.id.dayTextView)
         val post_list_item = itemView.findViewById<ConstraintLayout>(R.id.post_list_item)
     }
 
@@ -43,7 +42,6 @@ class RecyclerAdapter(private val activity: Activity, val arrayPost: ArrayList<P
         holder.organizationTextView.text = arrayPost[position].organization
         holder.hoursTextView.text = arrayPost[position].hours
         holder.dateTextView.text = arrayPost[position].date
-        holder.dayTextView.text = arrayPost[position].day
 
         holder.post_list_item.setOnLongClickListener {
 
