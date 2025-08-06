@@ -104,13 +104,24 @@ class  MainActivity : AppCompatActivity() {
     private fun fetchTotalHours(){
         database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").get()
             .addOnSuccessListener {
-                val totalhours = it.get("HOURS").toString()
+                val totalMinutes = it.get("HOURS").toString()
+                val totalMinutesInNumber = totalMinutes.toInt()
+                val hours = totalMinutesInNumber/60
+                val minutes = totalMinutesInNumber%60
+                var time = ""
+                if (minutes==0){
+                    time = "$hours"
+                }
+                else {
+                    time = "$hours:$minutes"
+                }
 
-                if (totalhours=="null"){
+
+                if (totalMinutes=="null"){
                     totalHoursTextView.text = "Total Hours: 0"
                 }
                 else{
-                    totalHoursTextView.text = "Total Hours: $totalhours"
+                    totalHoursTextView.text = "Total Hours: $time"
                 }
             }
             .addOnFailureListener {

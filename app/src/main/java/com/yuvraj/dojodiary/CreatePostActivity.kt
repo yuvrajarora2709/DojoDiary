@@ -32,18 +32,18 @@ class CreatePostActivity : AppCompatActivity() {
         val saveButton = findViewById<Button>(R.id.saveButton)
 
         //Get total hours data
-        var totalHoursInNumber = 0
+        var totalMinutesInNumber = 0
         database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").get()
             .addOnSuccessListener {
                 val totalHours = it.get("HOURS").toString()
 
                 if (totalHours=="null"){
-                    totalHoursInNumber = 0
+                    totalMinutesInNumber = 0
                 }
                 else{
-                    totalHoursInNumber = totalHours.toInt()
+                    totalMinutesInNumber = totalHours.toInt()
                 }
-                Toast.makeText(this, totalHoursInNumber.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, totalMinutesInNumber.toString(), Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Some error occurred", Toast.LENGTH_SHORT).show()
@@ -53,10 +53,14 @@ class CreatePostActivity : AppCompatActivity() {
         //Creating new post
         saveButton.setOnClickListener {
             //Getting post data from the user input
-            val hours = hoursEditText.text.toString()
+            val time = hoursEditText.text.toString()
+            val parts = time.split(":")
+            val hours = parts.getOrNull(0)?.toIntOrNull()?:0
+            val minutes = parts.getOrNull(1)?.toIntOrNull()?:0
+            val totalEnterMinutes = hours*60 + minutes
             val organization = organizationEditText.text.toString()
 
-            if (organization.isNotEmpty() && organization.isNotBlank() && hours.isNotBlank() && hours.isNotEmpty()){
+            if (organization.isNotEmpty() && organization.isNotBlank() && time.isNotEmpty() && time.isNotBlank()){
 
                 //To get current date and time
                 val currentTime = LocalDateTime.now()
@@ -79,7 +83,7 @@ class CreatePostActivity : AppCompatActivity() {
                 //Creating map before saving to database
                 val map = mutableMapOf<String,String>()
                 map.put("ORGANIZATION",organization)
-                map.put("HOURS",hours)
+                map.put("HOURS",totalEnterMinutes.toString())
                 map.put("DAY",dayOfWeek)
                 map.put("DATE",requiredDate)
                 map.put("TIME",requiredTime)
@@ -100,11 +104,11 @@ class CreatePostActivity : AppCompatActivity() {
                         Toast.makeText(this, "Some error occured", Toast.LENGTH_SHORT).show()
                     }
 
-                //Update total hours
+                //Update new total minutes
 
-                val newTotalHours = totalHoursInNumber + hours.toInt()
+                val newTotalMinutes = totalMinutesInNumber + totalEnterMinutes
                 val map2 = mutableMapOf<String,String>()
-                map2.put("HOURS",newTotalHours.toString())
+                map2.put("HOURS",newTotalMinutes.toString())
                 database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").set(map2)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Total hours updated", Toast.LENGTH_SHORT).show()

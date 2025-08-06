@@ -59,10 +59,21 @@ class ProfileActivity : AppCompatActivity() {
             database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").get()
 
                 .addOnSuccessListener {
-                    val fetchedHours = it.get("HOURS").toString()
-                    hoursTextView.setText("Total Hours: "+fetchedHours)
+                    val fetchedMinutes = it.get("HOURS").toString()
+                    val minutesIntoNumber = fetchedMinutes.toInt()
+                    val hours = minutesIntoNumber/60
+                    val minutes = minutesIntoNumber%60
+                    if (minutes==0){
+                        val time = "$hours"
+                        hoursTextView.setText("Total Hours: "+time)
+                    }
+                    else{
+                        val time = "$hours:$minutes"
+                        hoursTextView.setText("Total Hours: "+time)
+                    }
 
-                    if (fetchedHours=="null"){
+
+                    if (fetchedMinutes=="null"){
                         hoursTextView.setText("Total Hours: 0")
                     }
                     progressBar.visibility = View.GONE
@@ -89,10 +100,20 @@ class ProfileActivity : AppCompatActivity() {
         database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").get()
 
             .addOnSuccessListener {
-                val fetchedHours = it.get("HOURS").toString()
-                hoursTextView.setText("Total Hours: "+fetchedHours)
+                val fetchedMinutes = it.get("HOURS").toString()
+                val minutesIntoNumber = fetchedMinutes.toInt()
+                val hours = minutesIntoNumber/60
+                val minutes = minutesIntoNumber%60
+                if (minutes==0){
+                    val time = "$hours"
+                    hoursTextView.setText("Total Hours: "+time)
+                }
+                else{
+                    val time = "$hours:$minutes"
+                    hoursTextView.setText("Total Hours: "+time)
+                }
 
-                if (fetchedHours=="null"){
+                if (fetchedMinutes=="null"){
                     hoursTextView.setText("Total Hours: 0")
                 }
                 progressBar.visibility = View.GONE
