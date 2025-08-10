@@ -50,9 +50,9 @@
         android:layout_marginLeft="10dp"/>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        app:cardBackgroundColor="#A0F4FF"
+        app:cardBackgroundColor="@color/color_primary"
         app:cardCornerRadius="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,6 +68,6 @@
             android:gravity="center"
             android:text="2"
             android:textSize="20sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/white"/>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

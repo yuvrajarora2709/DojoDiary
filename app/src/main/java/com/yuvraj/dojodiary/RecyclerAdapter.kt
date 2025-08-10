@@ -40,8 +40,21 @@ class RecyclerAdapter(private val activity: Activity, val arrayPost: ArrayList<P
 
     override fun onBindViewHolder(holder: RecyclerAdapter.MyViewHolder, position: Int) {
         holder.organizationTextView.text = arrayPost[position].organization
-        holder.hoursTextView.text = arrayPost[position].hours
         holder.dateTextView.text = arrayPost[position].date
+
+        val totalminutes = arrayPost[position].hours?.toInt()
+        val hours = totalminutes?.div(60)
+        val minutes = totalminutes?.rem(60)
+
+        var time = ""
+        if (minutes==0){
+            time = "$hours"
+        }
+        else {
+            time = "$hours:$minutes"
+        }
+
+        holder.hoursTextView.text = time
 
         holder.post_list_item.setOnLongClickListener {
 

@@ -40,24 +40,6 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/hoursEditText"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_background"
-                android:ems="10"
-                android:gravity="center_horizontal"
-                android:textColorHint="@color/black"
-                android:textColor="@color/black"
-                android:hint="Enter Hours Volunteered"
-                android:inputType="time"
-                android:padding="7dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.438" />
-
-            <EditText
                 android:id="@+id/organizationEditText"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -69,25 +51,57 @@
                 android:hint="Enter Organization "
                 android:inputType="text"
                 android:padding="7dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.187" />
+                android:layout_marginTop="40dp"/>
+
+            <EditText
+                android:id="@+id/hoursEditText"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_background"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:hint="Enter Hours Volunteered"
+                android:inputType="time"
+                android:padding="7dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/organizationEditText"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/minutesEditText"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_background"
+                android:ems="10"
+                android:gravity="center_horizontal"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:hint="Enter Minutes Volunteered"
+                android:inputType="time"
+                android:padding="7dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hoursEditText"
+                android:layout_marginTop="20dp"/>
 
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#E63939"
+                android:backgroundTint="@color/color_primary"
                 android:text="Save"
                 android:textColor="@color/white"
                 android:textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.726" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/minutesEditText"
+                android:layout_marginTop="25dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

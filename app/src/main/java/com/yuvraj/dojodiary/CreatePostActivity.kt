@@ -30,6 +30,7 @@ class CreatePostActivity : AppCompatActivity() {
         val organizationEditText = findViewById<EditText>(R.id.organizationEditText)
         val hoursEditText = findViewById<EditText>(R.id.hoursEditText)
         val saveButton = findViewById<Button>(R.id.saveButton)
+        val minutesEditText = findViewById<EditText>(R.id.minutesEditText)
 
         //Get total hours data
         var totalMinutesInNumber = 0
@@ -53,14 +54,12 @@ class CreatePostActivity : AppCompatActivity() {
         //Creating new post
         saveButton.setOnClickListener {
             //Getting post data from the user input
-            val time = hoursEditText.text.toString()
-            val parts = time.split(":")
-            val hours = parts.getOrNull(0)?.toIntOrNull()?:0
-            val minutes = parts.getOrNull(1)?.toIntOrNull()?:0
+            val hours = hoursEditText.text.toString().toInt()
+            val minutes = minutesEditText.text.toString().toInt()
             val totalEnterMinutes = hours*60 + minutes
             val organization = organizationEditText.text.toString()
 
-            if (organization.isNotEmpty() && organization.isNotBlank() && time.isNotEmpty() && time.isNotBlank()){
+            if (organization.isNotEmpty() && organization.isNotBlank() && totalEnterMinutes!=0 && totalEnterMinutes!= null){
 
                 //To get current date and time
                 val currentTime = LocalDateTime.now()
