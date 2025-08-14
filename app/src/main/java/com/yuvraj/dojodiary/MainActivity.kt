@@ -34,7 +34,6 @@ class  MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
         // Initalizaing firebase auth
@@ -105,7 +104,7 @@ class  MainActivity : AppCompatActivity() {
         database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").get()
             .addOnSuccessListener {
                 val totalMinutes = it.get("HOURS").toString()
-                val totalMinutesInNumber = totalMinutes.toInt()
+                val totalMinutesInNumber = totalMinutes?.toIntOrNull()?:0
                 val hours = totalMinutesInNumber/60
                 val minutes = totalMinutesInNumber%60
                 var time = ""

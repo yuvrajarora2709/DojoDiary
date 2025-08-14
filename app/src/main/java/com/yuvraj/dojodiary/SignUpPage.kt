@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 class SignUpPage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_sign_up_page)
 
         // initializing firebase authentication

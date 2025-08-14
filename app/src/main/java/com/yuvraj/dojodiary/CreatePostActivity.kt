@@ -20,7 +20,6 @@ import java.util.Locale
 class CreatePostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_create_post)
 
         val auth = FirebaseAuth.getInstance()
@@ -54,12 +53,20 @@ class CreatePostActivity : AppCompatActivity() {
         //Creating new post
         saveButton.setOnClickListener {
             //Getting post data from the user input
-            val hours = hoursEditText.text.toString().toInt()
-            val minutes = minutesEditText.text.toString().toInt()
-            val totalEnterMinutes = hours*60 + minutes
+            val hours = hoursEditText.text.toString()
+            var hoursInNumber = 0
+            if (hours.isNotBlank()){
+                hoursInNumber = hours.toInt()
+            }
+            val minutes = minutesEditText.text.toString()
+            var minutesInNumber = 0
+            if (minutes.isNotBlank()){
+                minutesInNumber = minutes.toInt()
+            }
+            val totalEnterMinutes = hoursInNumber*60+minutesInNumber
             val organization = organizationEditText.text.toString()
 
-            if (organization.isNotEmpty() && organization.isNotBlank() && totalEnterMinutes!=0 && totalEnterMinutes!= null){
+            if (organization.isNotEmpty() && organization.isNotBlank() && (hours.isNotBlank() || minutes.isNotBlank())){
 
                 //To get current date and time
                 val currentTime = LocalDateTime.now()

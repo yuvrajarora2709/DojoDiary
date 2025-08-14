@@ -27,7 +27,6 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
 
         // Initialization of UI Elements
@@ -138,31 +137,4 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-//    fun fetchProfile(){
-//        // Added Database to sore profile and name
-//        database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("NAME").get()
-//
-//            // added successlistener to fetch/keep name for profile
-//            .addOnSuccessListener {
-//                val fetchedName = it.get("NAME").toString()
-//                nameTextView.setText("Name: "+fetchedName)
-//                //Toast.makeText(this, "check", Toast.LENGTH_SHORT).show()
-//
-//                if (fetchedName=="null"){
-//                    nameTextView.setText("Name: None")
-//                }
-//
-//            }
-//
-//        database.collection("MY_DATABASE").document(USERID).collection("PROFILE").document("TOTAL_HOURS").get()
-//
-//            .addOnSuccessListener {
-//                val fetchedHours = it.get("HOURS").toString()
-//                hoursTextView.setText("Total Hours: "+fetchedHours)
-//
-//                if (fetchedHours=="null"){
-//                    hoursTextView.setText("Total Hours: 0")
-//                }
-//            }
-//    }
 }
